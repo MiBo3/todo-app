@@ -1,0 +1,44 @@
+version: "0.1"
+
+services:
+  fe:
+    build:
+      context: "./fe"
+    container_name: "todo-dev-fe"
+    volumes:
+      - "/todo-vol/fe"
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    environment:
+      - "REACT_APP_BACKEND_URL=be:8000"
+    depends_on:
+      - "be"
+
+
+  be:
+    build:
+      context: "./be"
+    container_name: "todo-dev-be"
+    volumes:
+      - "/todo-vol/be"
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    environment:
+      - "MONGODB_URL=mongodb://mongo:27017/todo"
+    depends_on:
+      - "mongo"
+
+  mongo:
+    image: "mongo"
+    restart: "on-failure"
+    container_name: "todo-dev-mongo"
+    volumes:
+      - "/todo-vol/db"
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"

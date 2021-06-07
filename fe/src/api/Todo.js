@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = (() => {
-  const url = `${process.env.REACT_APP_API_URL}/todos`;
+  const url = `${process.env.REACT_APP_BACKEND_URL}/todos`;
 
   return {
     fetch: (query = {}) => {

@@ -2,7 +2,7 @@ import express from "express";
 import pick from "lodash.pick";
 
 import TodoModel from "../models/todo.js";
-import { MISSING_PARAMETERS, NOT_FOUND, SERVER_ERROR } from "../consts/todos";
+import { MISSING_PARAMETERS, NOT_FOUND, SERVER_ERROR } from "../consts/todos.js";
 
 const router = express.Router();
 

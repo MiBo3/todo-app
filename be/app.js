@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import routes from "./routes/index.js";
 
@@ -17,11 +18,15 @@ const app = express();
     console.log("Connection to Mongo successful")
   );
 
+  console.log(`Connecting to mongoDB at URL ${process.env.MONGODB_URL}`)
   await mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 })();
+
+app.use(cors);
+app.options('*', cors);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
