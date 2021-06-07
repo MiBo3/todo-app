@@ -1,26 +1,26 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = (() => {
-  const url = `${process.env.REACT_APP_API_URL}/todos`
+  const url = `${process.env.REACT_APP_API_URL}/todos`;
 
   return {
-    fetch: (query={}) => {
+    fetch: (query = {}) => {
       return axios.get(url, {
-        params: query
+        params: query,
       });
     },
     delete: (id) => {
       return axios.delete(url, {
-        params: { id }
-      })
+        params: { id },
+      });
     },
     update: (item) => {
-      return axios.put(url, item)
+      return axios.put(url, item);
     },
     create: (item) => {
       return axios.post(url, item);
-    }
-  }
-})()
+    },
+  };
+})();
 
-export default api
+export default api;
