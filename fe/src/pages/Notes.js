@@ -32,7 +32,10 @@ const Notes = () => {
   const [todoItems, setTodoItems] = useState([]);
 
   useEffect(() => {
-    api.fetch({}).then((res) => setTodoItems(res.data));
+    api
+      .fetch({})
+      .then((res) => setTodoItems(res.data))
+      .catch(() => {});
   }, []);
 
   const handleAdd = () => {
@@ -40,26 +43,33 @@ const Notes = () => {
       .create({ title: "TODO Title", description: "Description" })
       .then((res) => {
         setTodoItems([...todoItems, res.data]);
-      });
+      })
+      .catch(() => {});
   };
 
   const handleNoteChange = (id) => {
     return (item) => {
-      api.update({ id, ...item }).then((res) => {
-        const newItem = res.data;
-        const idx = todoItems.findIndex((item) => item._id === newItem._id);
-        const newItems = [...todoItems];
-        newItems[idx] = newItem;
-        setTodoItems(newItems);
-      });
+      api
+        .update({ id, ...item })
+        .then((res) => {
+          const newItem = res.data;
+          const idx = todoItems.findIndex((item) => item._id === newItem._id);
+          const newItems = [...todoItems];
+          newItems[idx] = newItem;
+          setTodoItems(newItems);
+        })
+        .catch(() => {});
     };
   };
 
   const handleNoteDelete = (id) => {
     return () => {
-      api.delete(id).then(() => {
-        setTodoItems(todoItems.filter((item) => item.id === id));
-      });
+      api
+        .delete(id)
+        .then(() => {
+          setTodoItems(todoItems.filter((item) => item.id === id));
+        })
+        .catch(() => {});
     };
   };
 
