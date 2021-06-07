@@ -1,0 +1,13 @@
+version: "0.1"
+
+services:
+  mongo:
+    image: mongo
+    restart: "no"
+    container_name: todo-dev-mongo
+    volumes:
+      - /todo-vol/db
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
