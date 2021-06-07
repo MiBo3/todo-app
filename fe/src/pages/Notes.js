@@ -67,7 +67,10 @@ const Notes = () => {
       api
         .delete(id)
         .then(() => {
-          setTodoItems(todoItems.filter((item) => item.id === id));
+          // There's some weird interaction, where the render would not reflect the correct state without
+          // seting items to empty list first
+          setTodoItems([]);
+          setTodoItems(todoItems.filter((item) => item._id !== id));
         })
         .catch(() => {});
     };
@@ -80,16 +83,18 @@ const Notes = () => {
         <button onClick={handleAdd}>Add todo</button>
       </StickyHeader>
       <NotesContainer>
-        <div>
-          {Object.values(todoItems).map((note, idx) => (
+        {todoItems.map((note, idx) => {
+          return (
             <Note
-              {...note}
+              title={note.title}
+              checked={note.checked}
+              description={note.description}
               key={idx}
               onChange={handleNoteChange(note._id)}
               onDelete={handleNoteDelete(note._id)}
             />
-          ))}
-        </div>
+          )
+        })}
       </NotesContainer>
     </>
   );

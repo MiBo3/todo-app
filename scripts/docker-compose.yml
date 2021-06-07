@@ -4,9 +4,9 @@ services:
   mongo:
     image: mongo
     restart: "no"
-    container_name: todo-dev-mongo
+    container_name: todo-dev-mongo-separate
     volumes:
-      - /todo-vol/db
+      - /todo-vol/db-separate
     ports:
       - "27017:27017"
     expose:

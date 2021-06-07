@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 router.put("/", async (req, res) => {
   const { id, title, description, checked } = req.body;
 
-  if (!id || !title || description === undefined || checked === undefined) {
+  if (!id || title  === undefined || description === undefined || checked === undefined) {
     return res.status(400).send({ message: MISSING_PARAMETERS });
   }
 
